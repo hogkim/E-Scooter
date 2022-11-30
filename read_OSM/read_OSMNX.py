@@ -68,4 +68,4 @@ if __name__ == "__main__":
     G_new.remove_node(10093887420)
     fig, ax = ox.plot_graph(G_new, node_size=10)
 
-    ox.save_graph_geopackage(G, filepath="./KAIST.gpkg")
+    ox.save_graphml(G, './KAIST.graphml')
