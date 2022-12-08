@@ -9,7 +9,8 @@ import plotly.express as px
 
 app = Dash(__name__, title="dash-dbx", update_title=None)
 server = app.server
-
+background = '#15171B'
+papcolor = '#15171B'
 # plt.use('SVG')
 
 app.layout = dmc.MantineProvider(
@@ -136,6 +137,7 @@ def update_output(map_name,figuredata):
             lon=gdf_nodes['x'],
             lat=gdf_nodes['y'],
             mode='markers',
+            marker_color='rgb(255, 255, 255)',
         ))
 
         for edgeidx in range(len(gdf_edges)):
@@ -146,10 +148,11 @@ def update_output(map_name,figuredata):
 
             for i in range(len(lats_data) - 1):
                 fig.add_trace(go.Scattergeo(lon=[lons_data[i], lons_data[i + 1]], lat=[lats_data[i], lats_data[i + 1]],
-                                            mode='lines', line=dict(width=1, color='red'), ))
+                                            mode='lines', line=dict(width=2, color='white'), ))
+
 
         fig.update_geos(lataxis_range=[36.3619, 36.3773], lonaxis_range=[127.3537, 127.3708])
-        fig.update_layout(showlegend=False)
+        fig.update_layout(showlegend=False, margin ={'t':0, 'r':0, 'b':0, 'l':0 }, plot_bgcolor = background, paper_bgcolor = papcolor, geo = dict(landcolor = background))
 
         return dcc.Graph(id = 'figuremap', figure=fig)
 
